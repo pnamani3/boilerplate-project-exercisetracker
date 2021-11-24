@@ -49,7 +49,7 @@ app.post('/api/users', bodyParser.urlencoded({ extended: false }), (request, res
   })
 })
 
-app.get('/api/exercise/users', (request, response) => {
+app.get('/api/users', (request, response) => {
   
   User.find({}, (error, arrayOfUsers) => {
     if(!error){
@@ -59,7 +59,7 @@ app.get('/api/exercise/users', (request, response) => {
   
 })
 
-app.post('/api/exercise/add', bodyParser.urlencoded({ extended: false }) , (request, response) => {
+app.post('/api/users/:_id/exercises', bodyParser.urlencoded({ extended: false }) , (request, response) => {
   
   let newSession = new Session({
     description: request.body.description,
@@ -72,7 +72,7 @@ app.post('/api/exercise/add', bodyParser.urlencoded({ extended: false }) , (requ
   }
   
   User.findByIdAndUpdate(
-    request.body.userId,
+    request.body[":_id"],
     {$push : {log: newSession}},
     {new: true},
     (error, updatedUser)=> {
@@ -89,7 +89,7 @@ app.post('/api/exercise/add', bodyParser.urlencoded({ extended: false }) , (requ
   )
 })
 
-app.get('/api/exercise/log', (request, response) => {
+app.get('/api/users/:id/log', (request, response) => {
   
   User.findById(request.query.userId, (error, result) => {
     if(!error){
