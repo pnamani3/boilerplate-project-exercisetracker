@@ -16,3 +16,5 @@ app.get('/', (req, res) => {
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
 })
+
+mongoose.connect("mongodb+srv://new_user_1:redball2020@cluster0.9sps0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",)
